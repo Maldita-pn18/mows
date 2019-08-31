@@ -1,11 +1,148 @@
 <html>
+
 <head>
   <title>mows</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+<style>
+  .Head {
+    background-color: lightblue;
+    color: black;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+  }
+
+  #address {
+    width: 98%;
+    margin-bottom: 10px;
+  }
+
+  .divBorder {
+    background-color: azure;
+    border: 2px solid black;
+  }
+</style>
+
 <body>
   <h1>MQTT</h1>
   <p>My MQTT Web App</p>
+  <div class="container">
+    <div class="row">
+      <div class="divBorder col-md-4">
+        <div class="row">
+          <div class="Head col-md-12">
+            <h6>Broker</h6>
+          </div>
+        </div>
+        <h6>Address:</h6>
+        <input id="address" type="text" name="address" placeholder="Address" value="ws://broker.hivemq.com:8000/mqtt" />
+        <button id="Btnconnect" class="btn-secondary" type="button">Connect</button>
+        <button id="Btndisconnect" class="btn-secondary" type="button">Disconnect</button>
+        <br>
+        <h6>Status:</h6>
+        <p id="status"><i>status</i></p>
+      </div>
+
+      <div class="divBorder col-md-4">
+        <div class="row">
+          <div class="Head col-md-12">
+            <h6>Publish</h6>
+          </div>
+        </div>
+        <h6>Topic:</h6>
+        <input id="publishTopic" type="text" style="width:98%; margin-bottom:10px;" name="publishTopic"
+          placeholder="publishTopic" />
+        <h6>Payload:</h6>
+        <input id="payload" type="text" style="width:98%; margin-bottom:10px;" name="payload" placeholder="payload" />
+        <button id="Btnpublish" class="btn-secondary" type="button" style="margin-bottom:10px;">Publish</button>
+      </div>
+
+      <div class="divBorder col-md-4">
+        <div class="row">
+          <div class="Head col-md-12">
+            <h6>Subscribe</h6>
+          </div>
+        </div>
+        <h6>Topic</h6>
+        <input id="subscribeTopic" type="text" style="width:98%; margin-bottom:10px;" name="subscribeTopic"
+          placeholder="subscribeTopic" />
+        <button id="Btnsubscribe" class="btn-secondary" type="button">Subscribe</button>
+        <button id="Btnunsubscribe" class="btn-secondary" type="button">Unsubscribe</button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="row">
+          <div id="messages" class="col-md-12" style="background-color:lightblue; color:black;height:40px;">
+            <h6>Message ...</h6>
+          </div>
+        </div>
+        <div class="row overflow-auto" style="height:200px;">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width:20%;" scope="col">Topic</th>
+                <th style="width: 45%;" scope="col">Payload</th>
+                <th style="width:35%;" scope="col">Time Stamp</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-6" style="border: 2px solid black;">
+        <div class="row">
+          <div class="col-md-12" style="color:black;text-align: center;height:40px;background-color: lightblue">
+            <h6>Publish History</h6>
+          </div>
+        </div>
+        <div class="row overflow-auto" style="height:200px;">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width:20%;" scope="col">Topic</th>
+                <th style="width: 35%;" scope="col">Payload</th>
+                <th style="width:45%;" scope="col">Time Stamp</th>
+              </tr>
+            </thead>
+            <tbody id="tableBodyPublish">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6" style="border: 2px solid black;">
+        <div class="row">
+          <div class="col-md-12" style="color:black;text-align: center;background-color: lightblue;height:40px;">
+            <h6>Subscribe History</h6>
+          </div>
+        </div>
+        <div class="row overflow-auto" style="height:200px;">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width:40%;" scope="col">Topic</th>
+                <th style="width:60%;" scope="col">Time Stamp</th>
+              </tr>
+            </thead>
+            <tbody id="tableBodySubscribe">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <script src="scripts/browserMqtt.js"></script>
 <script src="scripts/controller.js"></script>
+
 </html>
